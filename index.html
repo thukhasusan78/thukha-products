@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThuKha Industries — Products</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+        /* Header */
+        .header {
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid #1a1a2e;
+        }
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #c0a060, #e8d48b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+        .header p {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 0.4rem;
+            font-weight: 300;
+        }
+        /* Filters */
+        .filters {
+            display: flex;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .filters::-webkit-scrollbar { display: none; }
+        .filter-btn {
+            flex-shrink: 0;
+            padding: 0.5rem 1.2rem;
+            border-radius: 999px;
+            border: 1px solid #2a2a3e;
+            background: transparent;
+            color: #aaa;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: #c0a060;
+            color: #0a0a0f;
+            border-color: #c0a060;
+        }
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            padding: 1rem 1.5rem 2rem;
+        }
+        .card {
+            background: #111120;
+            border-radius: 16px;
+            border: 1px solid #1a1a2e;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            border-color: #c0a060;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(192, 160, 96, 0.08);
+        }
+        .card .badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #c0a060;
+            margin-bottom: 0.8rem;
+        }
+        .card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+        .card p {
+            font-size: 0.85rem;
+            color: #999;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        .card .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1rem;
+        }
+        .card .features span {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.7rem;
+            border-radius: 999px;
+            background: #1a1a2e;
+            color: #bbb;
+        }
+        .card .price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #e8d48b;
+        }
+        .card .contact-badge {
+            font-size: 0.7rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #555;
+            font-size: 0.8rem;
+            border-top: 1px solid #1a1a2e;
+        }
+        .footer a { color: #c0a060; text-decoration: none; }
+        .empty {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+            grid-column: 1 / -1;
+        }
+        @media (max-width: 640px) {
+            .header h1 { font-size: 1.4rem; }
+            .grid { grid-template-columns: 1fr; padding: 0.75rem; }
+            .filters { padding: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>✦ ThuKha Industries</h1>
+        <p>Digital Solutions & Premium Products</p>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="grid"></div>
+    <div class="footer">
+        <a href="https://t.me/thukhasusan78">Contact on Telegram</a> · © 2026 ThuKha Industries
+    </div>
+    <script>
+        let allProducts = [];
+        fetch('products.json')
+            .then(r => r.json())
+            .then(data => {
+                allProducts = data.products;
+                renderFilters(data.categories);
+                render(allProducts);
+            });
+        function renderFilters(cats) {
+            const div = document.getElementById('filters');
+            div.innerHTML = '<button class="filter-btn active" data-cat="all">All</button>' +
+                cats.map(c => `<button class="filter-btn" data-cat="${c}">${c}</button>`).join('');
+            div.addEventListener('click', e => {
+                const btn = e.target.closest('.filter-btn');
+                if (!btn) return;
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const cat = btn.dataset.cat;
+                render(cat === 'all' ? allProducts : allProducts.filter(p => p.category === cat));
+            });
+        }
+        function render(products) {
+            const grid = document.getElementById('grid');
+            if (!products.length) {
+                grid.innerHTML = '<div class="empty">No products in this category.</div>';
+                return;
+            }
+            grid.innerHTML = products.map(p => `
+                <div class="card">
+                    <div class="badge">${p.category}</div>
+                    <h3>${p.name}</h3>
+                    <p>${p.description}</p>
+                    <div class="features">${p.features.map(f => `<span>${f}</span>`).join('')}</div>
+                    <div class="price">${p.price}</div>
+                    <div class="contact-badge">Order via Telegram</div>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>
