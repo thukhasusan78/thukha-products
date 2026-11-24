@@ -40,60 +40,6 @@
       "image": ""
     },
     {
-      "id": 4,
-      "name": "ChatGPT Plus — Shared",
-      "category": "Software Licenses",
-      "price": "15,000 MMK",
-      "description": "Shared ChatGPT Plus account. Full GPT-4 access.",
-      "features": ["GPT-4 access", "Shared account", "Monthly"],
-      "image": ""
-    },
-    {
-      "id": 5,
-      "name": "Canva Pro — 1 Year",
-      "category": "Software Licenses",
-      "price": "3,000 MMK",
-      "description": "Premium design tools. 1 year Canva Pro access.",
-      "features": ["1 year", "Premium features", "Team access"],
-      "image": ""
-    },
-    {
-      "id": 6,
-      "name": "YouTube Premium — 1 Year",
-      "category": "Software Licenses",
-      "price": "35,000 MMK",
-      "description": "Ad-free YouTube. Background play. 1 year access.",
-      "features": ["No ads", "Background play", "1 year"],
-      "image": ""
-    },
-    {
-      "id": 7,
-      "name": "Telegram Bot Hosting — Starter",
-      "category": "Bot Hosting",
-      "price": "6,000 MMK/mo",
-      "description": "Basic bot hosting. 1GB RAM, 5GB SSD. Python/Node.js.",
-      "features": ["1GB RAM", "5GB SSD", "Python/Node.js"],
-      "image": ""
-    },
-    {
-      "id": 8,
-      "name": "Telegram Bot Hosting — Pro",
-      "category": "Bot Hosting",
-      "price": "12,000 MMK/mo",
-      "description": "Advanced bot hosting. 2GB RAM, 30GB SSD. Priority support.",
-      "features": ["2GB RAM", "30GB SSD", "Priority support"],
-      "image": ""
-    },
-    {
-      "id": 9,
-      "name": "BLE Jammer Tutorial Pack",
-      "category": "Network Tools",
-      "price": "Contact",
-      "description": "Complete BLE jammer assembly guide with diagrams and links.",
-      "features": ["Step-by-step guide", "Circuit diagrams", "Parts list"],
-      "image": ""
-    },
-    {
       "id": 10,
       "name": "1-Antenna Bluetooth Jammer",
       "category": "Bluetooth Jammers",
@@ -109,15 +55,6 @@
       "price": "35,000 MMK",
       "description": "Full VIP access to BLE Jammer Tutorial channel with assembly guides, diagrams, and parts links.",
       "features": ["Step-by-step guide", "Circuit diagrams", "Parts list", "VIP channel access"],
-      "image": ""
-    },
-    {
-      "id": 12,
-      "name": "Custom AI Agent Setup",
-      "category": "AI Services",
-      "price": "Contact",
-      "description": "Personal AI agent tailored to your business needs.",
-      "features": ["Custom development", "Telegram integration", "Ongoing support"],
       "image": ""
     }
   ]
